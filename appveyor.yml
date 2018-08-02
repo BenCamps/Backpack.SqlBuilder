@@ -18,5 +18,5 @@ dotnet_csproj:
 configuration: Release
   
 artifacts:
-  - path: src\Backpack.SqlBuilder\bin\$(configuration)\Backpack.SqlBuilder.nupkg
+  - path: src\Backpack.SqlBuilder\bin\$(configuration)\*.nupkg
     name: Backpack.SqlBuilder
