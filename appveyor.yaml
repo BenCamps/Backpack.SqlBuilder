@@ -1,0 +1,19 @@
+image: Previous Visual Studio 2017
+
+build:
+  verbosity: minimal
+  
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+  
+configuration: Release
+  
+artifacts:
+  - path: src\Backpack.SqlBuilder\bin\$(configuration)\Backpack.SqlBuilder.nupkg
+    name: Backpack.SqlBuilder
