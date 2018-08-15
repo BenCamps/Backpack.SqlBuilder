@@ -16,5 +16,5 @@ build:
   verbosity: minimal  
   
 artifacts:
-  - path: src\Backpack.SqlBuilder\bin\%configuration%\*.nupkg
+  - path: src\Backpack.SqlBuilder\bin\$(configuration)\*.nupkg
     name: Backpack.SqlBuilder_package
