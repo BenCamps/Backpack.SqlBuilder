@@ -1,0 +1,30 @@
+image: Visual Studio 2017
+
+version: '1.0.{build}'
+
+install:
+- dotnet restore src
+
+branches:
+    only:
+      - master
+      - /appveyor.*/ 
+build:
+  project: src\Backpack.SqlBuilder.sln
+  verbosity: minimal  
+  
+
+platform: Any CPU
+    
+configuration:  Release
+
+# patch Backpack.SqlBuilder.csproj file with appveyor version
+dotnet_csproj:
+        patch: true
+        file: 'src\Backpack.SqlBuilder\Backpack.SqlBuilder.csproj'
+        version: '{version}'
+
+  
+artifacts:
+  - path: src\Backpack.SqlBuilder\bin\$(configuration)\*.nupkg
+    name: Backpack.SqlBuilder_package
