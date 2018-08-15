@@ -1,13 +1,36 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup Label="Assembly Info">
     <Version>1.0.1</Version>
+    <RootNamespace>Backpack.SqlBuilder</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Build Options">
     <TargetFrameworks>net20;net40;netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Pack Options">
+    <PackageOutputPath>$(OutputPath)</PackageOutputPath>
+    <!--include pdb files in the package, to give users debug symbols-->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Info">
+    <Title>$(AssemblyTitle)</Title>
+    <Description>A sql builder with a fluent interface</Description>
+    <PackageTags>sqlbuilder fluent cross-platfrom</PackageTags>
+    <Authors>Ben Campbell</Authors>
+    <PackageVersion>$(Version)</PackageVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <!--<PackageReleaseNotes></PackageReleaseNotes>-->
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/BenCamps/Backpack.SqlBuilder</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/BenCamps/Backpack.SqlBuilder.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework) == 'net20'">
     <PackageReference Include="LinqBridge" Version="1.3.0" />
   </ItemGroup>
-
 </Project>
