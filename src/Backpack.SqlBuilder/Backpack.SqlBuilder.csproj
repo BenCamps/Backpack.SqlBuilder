@@ -29,6 +29,10 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/BenCamps/Backpack.SqlBuilder.git</RepositoryUrl>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(APPVEYOR_REPO_BRANCH)' != '' And '$(APPVEYOR_REPO_BRANCH)' != 'master'">
+    <PackageVersionSuffix>pre</PackageVersionSuffix>
+  </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework) == 'net20'">
     <PackageReference Include="LinqBridge" Version="1.3.0" />

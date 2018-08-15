@@ -6,26 +6,28 @@ install:
 - dotnet restore src
 
 branches:
-      only:
-        - master
-        - dev
-        - /appveyor.*/
-    
+    only:
+      - master
+      - /appveyor.*/ 
 build:
   project: src\Backpack.SqlBuilder.sln
   verbosity: minimal  
   
-configuration: Release
 
-# patch .csproj file with appveyor version
+platform: Any CPU
+    
+configuration:  Release
+
+# patch Backpack.SqlBuilder.csproj file with appveyor version
 dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: '{version}'
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
+        patch: true
+        file: 'src\Backpack.SqlBuilder\Backpack.SqlBuilder.csproj'
+        version: '{version}'
+        package_version: '{version}'
+        assembly_version: '{version}'
+        file_version: '{version}'
+        informational_version: '{version}'
+
   
 artifacts:
   - path: src\Backpack.SqlBuilder\bin\$(configuration)\*.nupkg
