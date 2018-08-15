@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Pack Options">
-    <PackageOutputPath>$(OutputPath)</PackageOutputPath>
+    <!--<PackageOutputPath>$(OutputPath)</PackageOutputPath>-->
     <!--include pdb files in the package, to give users debug symbols-->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
@@ -21,7 +21,7 @@
     <Description>A sql builder with a fluent interface</Description>
     <PackageTags>sqlbuilder fluent cross-platfrom</PackageTags>
     <Authors>Ben Campbell</Authors>
-    <PackageVersion>$(Version)</PackageVersion>
+    <!--<PackageVersion>$(Version)</PackageVersion>-->
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <!--<PackageReleaseNotes></PackageReleaseNotes>-->
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
@@ -29,10 +29,9 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/BenCamps/Backpack.SqlBuilder.git</RepositoryUrl>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(APPVEYOR_REPO_BRANCH)' != '' And '$(APPVEYOR_REPO_BRANCH)' != 'master'">
-  <PackageVersionPrefix>$(Version)</PackageVersionPrefix>
-    <PackageVersionSuffix>pre</PackageVersionSuffix>
+    <PackageVersion>$(Version)-pre</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework) == 'net20'">
