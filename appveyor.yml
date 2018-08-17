@@ -3,7 +3,7 @@ image: Visual Studio 2017
 version: '1.0.{build}'
 
 install:
-- dotnet restore src
+- dotnet restore src\Backpack.SqlBuilder.sln
 
 branches:
     only:
