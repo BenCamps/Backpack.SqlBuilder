@@ -1,29 +1,39 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <!--VisualStudio Boilerplate-->
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{212479E1-1FB7-41D8-A264-EA7D85720D12}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SmartDeviceProject1</RootNamespace>
-    <AssemblyName>SmartDeviceProject1</AssemblyName>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+  </PropertyGroup>
+  
+  <!--Target Platform Stuff-->
+  <PropertyGroup>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>PocketPC</PlatformFamilyName>
     <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
     <OSVersion>5.1</OSVersion>
-    <DeployDirSuffix>SmartDeviceProject1</DeployDirSuffix>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
     <FormFactorID>
     </FormFactorID>
   </PropertyGroup>
+  
+  <!--Project Spacific Stuff-->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Backpack.SqlBuilder</RootNamespace>
+    <AssemblyName>Backpack.SqlBuilder</AssemblyName>
+    <DeployDirSuffix>Backpack.SqlBuilder</DeployDirSuffix>
+    <ProjectGuid>{212479E1-1FB7-41D8-A264-EA7D85720D12}</ProjectGuid>
+  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\net20-cf\</OutputPath>
     <DefineConstants>TRACE;DEBUG;PocketPC;NetCF;NET20</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
@@ -35,7 +45,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Release\net20-cf</OutputPath>
     <DefineConstants>TRACE;PocketPC;NetCF;NET20</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
