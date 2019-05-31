@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Backpack.SqlBuilder.Dialects
+namespace Backpack.SqlBuilder
 {
     public abstract class SqlDialect : ISqlDialect
     {

@@ -2,23 +2,8 @@
 using System.Data;
 using System.Text;
 
-namespace Backpack.SqlBuilder.Dialects
+namespace Backpack.SqlBuilder.Sqlite
 {
-    public static class SqliteDataType
-    {
-        public const string TEXT = "TEXT";
-        public const string REAL = "REAL";
-        public const string INTEGER = "INTEGER";
-        public const string BLOB = "BLOB";
-        public const string NUMERIC = "NUMERIC";
-
-        public const string BOOLEAN = "BOOLEAN";
-        public const string DATATIME = "DATETIME";
-
-        public const string DOUBLE = "DOUBLE";
-        public const string FLOAT = "FLOAT";
-    }
-
     public class SqliteDialect : SqlDialect
     {
         public override string GetColumnDefinition(ColumnInfo col)
@@ -98,8 +83,8 @@ namespace Backpack.SqlBuilder.Dialects
 
         public override DbType MapSQLtypeToDbType(string sqlType)
         {
-            if(sqlType == null) { throw new ArgumentNullException("sqlType"); }
-
+            if (sqlType == null) { throw new ArgumentNullException("sqlType"); }
+            sqlType = sqlType.ToUpperInvariant();
             switch (sqlType)
             {
                 case SqliteDataType.BLOB:
@@ -118,7 +103,7 @@ namespace Backpack.SqlBuilder.Dialects
                 case SqliteDataType.DOUBLE:
                     { return DbType.Double; }
                 case SqliteDataType.FLOAT:
-                    { return DbType.Single; }                
+                    { return DbType.Single; }
                 default:
                     { throw new ArgumentException("value:" + sqlType + " is invalid", "sqlType"); }
             }

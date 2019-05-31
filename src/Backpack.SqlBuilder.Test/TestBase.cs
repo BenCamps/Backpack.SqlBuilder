@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using Backpack.SqlBuilder.Dialects;
+﻿using Backpack.SqlBuilder.Sqlite;
+using FluentAssertions;
 using System.Data.Common;
 using System.IO;
 using Xunit.Abstractions;
