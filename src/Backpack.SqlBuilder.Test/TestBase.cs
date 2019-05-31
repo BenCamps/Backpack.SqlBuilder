@@ -20,6 +20,8 @@ namespace Backpack.SqlBuilder.Test
 
 #if SYSTEM_DATA_SQLITE
             DbProvider = System.Data.SQLite.SQLiteFactory.Instance;
+#elif MICROSOFT_DATA_SQLITE
+            DbProvider = Microsoft.Data.Sqlite.SqliteFactory.Instance;
 #endif
         }
 
