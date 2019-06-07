@@ -4,13 +4,12 @@ using System.Text;
 
 namespace Backpack.SqlBuilder
 {
-    public class SqlSelectBuilder : IAcceptsJoin
+    public class SqlSelectBuilder : SqlCommandBuilder, IAcceptsJoin
     {
         public TableOrSubQuery Source { get; set; }
-        public IList<string> ResultColumns { get; protected set; }
+        public IList<string> ResultColumns { get; protected set; } = new ResultColumnCollection();
 
-        public IList<JoinClause> JoinClauses { get; protected set; }
-        
+        public IList<JoinClause> JoinClauses { get; protected set; } = new List<JoinClause>();
 
         public WhereClause WhereClause { get; set; }
         public GroupByClause GroupByClause { get; set; }
@@ -21,20 +20,24 @@ namespace Backpack.SqlBuilder
 
         public SqlSelectBuilder()
         {
-            JoinClauses = new List<JoinClause>();
-
-            this.ResultColumns = new ResultColumnCollection();
         }
 
-        public override string ToString()
+        public SqlSelectBuilder(ISqlDialect dialect) : base(dialect)
+        {
+        }
+
+        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (ResultColumns == null) { throw new ArgumentNullException("ResultColumns"); }
 
-            var sb = new StringBuilder();
             sb.Append("SELECT ");
             sb.Append(ResultColumns.ToString());
 
-            if (Source != null) { sb.Append(" FROM ").Append(Source.ToString()); }
+            if (Source != null)
+            {
+                sb.Append(" FROM ");
+                Source.AppendTo(sb, dialect);
+            }
 
             foreach (var joinCommand in JoinClauses)
             {
@@ -62,8 +65,6 @@ namespace Backpack.SqlBuilder
                 sb.Append(" ");
                 LimitClause.AppendTo(sb);
             }
-
-            return sb.ToString();
         }
 
         //public IAcceptsJoin Join(TableOrSubQuery source, string constraint)

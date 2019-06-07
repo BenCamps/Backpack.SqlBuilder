@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Backpack.SqlBuilder
 {
-    public class TableOrSubQuery : SqlBuilder
+    public class TableOrSubQuery : SqlCommandBuilder
     {
         public string Table { get; set; }
         public SqlSelectBuilder SubQuery { get; set; }
