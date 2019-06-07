@@ -4,8 +4,16 @@ using System.Text;
 
 namespace Backpack.SqlBuilder
 {
-    public class SqlInsertCommand
+    public class SqlInsertCommand : SqlCommandBuilder
     {
+        public SqlInsertCommand()
+        {
+        }
+
+        public SqlInsertCommand(ISqlDialect dialect) : base(dialect)
+        {
+        }
+
         public string TableName { get; set; }
         public OnConflictOption ConflictOption { get; set; }
 
@@ -14,10 +22,8 @@ namespace Backpack.SqlBuilder
         public IEnumerable<String> ValueExpressions { get; set; }
         public SqlSelectBuilder SelectExpression { get; set; }
 
-        public override string ToString()
+        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
-            var sb = new StringBuilder();
-
             sb.Append("INSERT");
             if (ConflictOption != OnConflictOption.Default)
             { sb.Append(" OR " + ConflictOption.ToString()); }
@@ -89,15 +95,16 @@ namespace Backpack.SqlBuilder
                 }
                 else if (SelectExpression != null)
                 {
-                    sb.AppendLine().Append(SelectExpression.ToString());
+
+
+                    sb.AppendLine();
+                    SelectExpression.AppendTo(sb, dialect);
                 }
                 else
                 {
                     sb.AppendLine().Append("DEFAULT VALUES");
                 }
             }
-
-            return sb.ToString();
         }
     }
 }

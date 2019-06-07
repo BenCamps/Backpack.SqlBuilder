@@ -1,181 +1,20 @@
-﻿using Backpack.SqlBuilder.Dialects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Backpack.SqlBuilder
 {
-    public abstract class TableConstraint
+    public class CreateTable : SqlCommandBuilder
     {
-        public string ConstraintName { get; set; }
-    }
-
-    public class UniqueConstraint : TableConstraint
-    {
-        public IEnumerable<ColumnInfo> Columns { get; set; }
-        public IEnumerable<string> ColumnNames { get; set; }
-
-        public string ConflictOption { get; set; }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
-            sb.Append("UNIQUE ( ");
-            if (Columns != null)
-            {
-                bool first = true;
-                foreach (var col in Columns)
-                {
-                    if (!first) { sb.Append(", "); }
-                    else { first = false; }
-                    sb.Append(col.Name);
-                }
-            }
-            else if (ColumnNames != null)
-            {
-                bool first = true;
-                foreach (var col in ColumnNames)
-                {
-                    if (!first) { sb.Append(", "); }
-                    else { first = false; }
-                    sb.Append(col);
-                }
-            }
-            else
-            { throw new InvalidOperationException("either Columns or ColumnNames must be set"); }
-            sb.Append(")");
-
-            if (!string.IsNullOrEmpty(ConflictOption))
-            {
-                sb.Append(" ON CONFLICT ").Append(ConflictOption);
-            }
-
-            return sb.ToString();
-        }
-    }
-
-    public class PrimaryKeyConstraint : TableConstraint
-    {
-        public IEnumerable<ColumnInfo> Columns { get; set; }
-        public IEnumerable<string> ColumnNames { get; set; }
-
-        public string ConflictOption { get; set; }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
-            sb.Append("PRIMARY KEY ( ");
-            if (Columns != null)
-            {
-                bool first = true;
-                foreach (var col in Columns)
-                {
-                    if (!first) { sb.Append(", "); }
-                    else { first = false; }
-                    sb.Append(col.Name);
-                }
-            }
-            else if (ColumnNames != null)
-            {
-                bool first = true;
-                foreach (var col in ColumnNames)
-                {
-                    if (!first) { sb.Append(", "); }
-                    else { first = false; }
-                    sb.Append(col);
-                }
-            }
-            else
-            { throw new InvalidOperationException("either Columns or ColumnNames must be set"); }
-            sb.Append(")");
-
-            if (!string.IsNullOrEmpty(ConflictOption))
-            {
-                sb.Append(" ON CONFLICT ").Append(ConflictOption);
-            }
-
-            return sb.ToString();
-        }
-    }
-
-    public class CheckConstraint : TableConstraint
-    {
-        public string Expression { get; set; }
-
-        public CheckConstraint(string expression)
-        { Expression = expression; }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("CHECK (").Append(Expression).Append(")");
-            return sb.ToString();
-        }
-    }
-
-    public class ForeignKeyConstraint : TableConstraint
-    {
-        public IEnumerable<ColumnInfo> Columns { get; set; }
-        public IEnumerable<string> ColumnNames { get; set; }
-
-        public string ForeignKeyClause { get; set; }
-
-        //public string References { get; set; }
-
-        //public IEnumerable<ColumnInfo> ReferenceColumns { get; set; }
-        //public IEnumerable<string> ReferenceColumnNames { get; set; }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
-            sb.Append("FOREIGN KEY ( ");
-            if (Columns != null)
-            {
-                bool first = true;
-                foreach (var col in Columns)
-                {
-                    if (!first) { sb.Append(", "); }
-                    else { first = false; }
-                    sb.Append(col.Name);
-                }
-            }
-            else if (ColumnNames != null)
-            {
-                bool first = true;
-                foreach (var col in ColumnNames)
-                {
-                    if (!first) { sb.Append(", "); }
-                    else { first = false; }
-                    sb.Append(col);
-                }
-            }
-            else
-            { throw new InvalidOperationException("either Columns or ColumnNames must be set"); }
-            sb.Append(")");
-
-            sb.Append(ForeignKeyClause);
-
-            return sb.ToString();
-        }
-    }
-
-    public class CreateTable
-    {
-        public static ISqlDialect DefaultDialect { get; set; }
-        public ISqlDialect Dialect { get; set; }
-
         public bool Temp { get; set; }
         public bool IfNotExists { get; set; }
 
         public string SchemaName { get; set; }
         public string TableName { get; set; }
 
-        public IEnumerable<ColumnInfo> Columns { get; set; }
+        public ICollection<ColumnInfo> Columns { get; set; } = new List<ColumnInfo>();
 
-        public IEnumerable<string> TableConstraints { get; set; }
+        public ICollection<TableConstraint> TableConstraints { get; set; } = new List<TableConstraint>();
 
         public bool WithoutRowid { get; set; }
 
@@ -185,9 +24,8 @@ namespace Backpack.SqlBuilder
         {
         }
 
-        public CreateTable(ISqlDialect dialect)
+        public CreateTable(ISqlDialect dialect) : base(dialect)
         {
-            Dialect = dialect;
         }
 
         public override string ToString()
@@ -195,9 +33,18 @@ namespace Backpack.SqlBuilder
             return ToString(Dialect ?? SqlDialect.DefaultDialect);
         }
 
-        public string ToString(ISqlDialect dialect)
+        public void WithColumns(IEnumerable<ColumnInfo> columns)
         {
-            var sb = new StringBuilder();
+            foreach (var c in columns)
+            {
+                Columns.Add(c);
+            }
+        }
+
+        public override void AppendTo(StringBuilder sb)
+        {
+            var dialect = Dialect;
+
             sb.Append("CREATE");
             if (Temp) { sb.Append(" TEMP"); }
             sb.Append(" TABLE ");
@@ -207,7 +54,8 @@ namespace Backpack.SqlBuilder
 
             if (SelectStatment != null)
             {
-                sb.Append(" AS ").Append(SelectStatment.ToString());
+                sb.Append(" AS ");
+                SelectStatment.AppendTo(sb);
             }
             else
             {
@@ -226,7 +74,7 @@ namespace Backpack.SqlBuilder
                     {
                         if (!first) { sb.Append(", "); }
                         else { first = false; }
-                        sb.Append(constr);
+                        constr.AppendTo(sb, dialect);
                     }
                 }
 
@@ -234,8 +82,74 @@ namespace Backpack.SqlBuilder
 
                 if (WithoutRowid) { sb.Append(" WITHOUT ROWID"); }
             }
+        }
+    }
 
-            return sb.ToString();
+    public static class CreateTableExtentions
+    {
+        public static CreateTable WithTableConstraints(this CreateTable @this, IEnumerable<string> tableConstraints)
+        {
+            foreach (var tc in tableConstraints)
+            {
+                @this.TableConstraints.Add(new GenericConstraint(tc));
+            }
+
+            return @this;
+        }
+
+        public static CreateTable WithTableConstraints(this CreateTable @this, IEnumerable<TableConstraint> tableConstraints)
+        {
+            foreach (var tc in tableConstraints)
+            {
+                @this.TableConstraints.Add(tc);
+            }
+
+            return @this;
+        }
+
+        public static CreateTable PrimaryKey(this CreateTable @this, string columnName)
+        {
+            @this.TableConstraints.Add(new PrimaryKeyConstraint() { ColumnNames = new string[] { columnName } });
+            return @this;
+        }
+
+        public static CreateTable ForeignKey(this CreateTable @this,
+            IEnumerable<string> columnNames,
+            string references,
+            IEnumerable<string> referencesColumnNames = null,
+            ForeignKeyTriggers onDelete = default(ForeignKeyTriggers),
+            ForeignKeyTriggers onUpdate = default(ForeignKeyTriggers),
+            Deferrable deferrable = default(Deferrable)
+            )
+        {
+            if (referencesColumnNames == null) { referencesColumnNames = columnNames; }
+
+            @this.TableConstraints.Add(new ForeignKeyConstraint()
+            {
+                ColumnNames = columnNames,
+                ReferenceColumnNames = referencesColumnNames,
+                OnDelete = onDelete,
+                OnUpdate = onUpdate,
+                Deferrable = deferrable,
+            });
+
+            return @this;
+        }
+
+        public static CreateTable Unique(this CreateTable @this, string columnName, string onConflict = null)
+        {
+            if (columnName == null) { throw new ArgumentNullException("columnName"); }
+            @this.TableConstraints.Add(new UniqueConstraint() { ColumnNames = new string[] { columnName }, ConflictOption = onConflict });
+
+            return @this;
+        }
+
+        public static CreateTable Check(this CreateTable @this, string expression)
+        {
+            if (expression == null) { throw new ArgumentNullException("expression"); }
+
+            @this.TableConstraints.Add(new CheckConstraint(expression));
+            return @this;
         }
     }
 }

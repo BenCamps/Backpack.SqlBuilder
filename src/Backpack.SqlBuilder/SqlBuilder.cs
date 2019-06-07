@@ -1,16 +1,30 @@
-﻿using System.Text;
+﻿using System;
 
 namespace Backpack.SqlBuilder
 {
     public abstract class SqlBuilder
     {
-        public abstract void AppendTo(StringBuilder sb);
+        public static ISqlDialect DefaultDialect { get; set; }
 
-        public override string ToString()
+        ISqlDialect _dialect;
+
+        protected SqlBuilder() { }
+
+        protected SqlBuilder(ISqlDialect dialect)
         {
-            var sb = new StringBuilder();
-            AppendTo(sb);
-            return sb.ToString();
+            Dialect = dialect ?? throw new ArgumentNullException(nameof(dialect));
         }
+
+        public ISqlDialect Dialect
+        {
+            get => _dialect ?? DefaultDialect;
+            set => _dialect = value;
+        }
+
+        public static SqlSelectBuilder Select => new SqlSelectBuilder(DefaultDialect);
+
+        public static SqlInsertCommand Insert => new SqlInsertCommand(DefaultDialect);
+
+        public static CreateTable CreateTable => new CreateTable(DefaultDialect);
     }
 }

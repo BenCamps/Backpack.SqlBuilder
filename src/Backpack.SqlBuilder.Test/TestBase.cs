@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using Backpack.SqlBuilder.Dialects;
+﻿using Backpack.SqlBuilder.Sqlite;
+using FluentAssertions;
 using System.Data.Common;
 using System.IO;
 using Xunit.Abstractions;
@@ -20,6 +20,8 @@ namespace Backpack.SqlBuilder.Test
 
 #if SYSTEM_DATA_SQLITE
             DbProvider = System.Data.SQLite.SQLiteFactory.Instance;
+#elif MICROSOFT_DATA_SQLITE
+            DbProvider = Microsoft.Data.Sqlite.SqliteFactory.Instance;
 #endif
         }
 
