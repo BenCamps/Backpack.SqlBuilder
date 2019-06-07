@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Backpack.SqlBuilder
 {
-    public class TableOrSubQuery : SqlCommandBuilder
+    public class TableOrSubQuery : CommandElement
     {
         public string Table { get; set; }
         public SqlSelectBuilder SubQuery { get; set; }
@@ -39,10 +39,15 @@ namespace Backpack.SqlBuilder
             this.Alias = alias;
         }
 
-        public override void AppendTo(StringBuilder sb)
+        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (!string.IsNullOrEmpty(Table)) { sb.Append(Table); }
-            else if (SubQuery != null) { sb.Append("(").Append(SubQuery).Append(")"); }
+            else if (SubQuery != null)
+            {
+                sb.Append("(");
+                SubQuery.AppendTo(sb);
+                sb.Append(")");
+            }
 
             if (!String.IsNullOrEmpty(Alias))
             { sb.Append(" AS " + Alias); }

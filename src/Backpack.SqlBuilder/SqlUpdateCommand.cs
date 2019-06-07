@@ -3,8 +3,16 @@ using System.Text;
 
 namespace Backpack.SqlBuilder
 {
-    public class SqlUpdateCommand
+    public class SqlUpdateCommand : SqlCommandBuilder
     {
+        public SqlUpdateCommand()
+        {
+        }
+
+        public SqlUpdateCommand(ISqlDialect dialect) : base(dialect)
+        {
+        }
+
         public string TableName { get; set; }
         public OnConflictOption ConflictOption { get; set; }
 
@@ -16,9 +24,8 @@ namespace Backpack.SqlBuilder
 
         public WhereClause Where { get; set; }
 
-        public override string ToString()
+        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
-            var sb = new StringBuilder();
             sb.AppendLine("UPDATE");
             if (ConflictOption != OnConflictOption.Default)
             { sb.AppendLine("OR " + ConflictOption.ToString()); }
@@ -43,8 +50,11 @@ namespace Backpack.SqlBuilder
                 }
             }
 
-            if (Where != null) { sb.AppendLine(Where.ToString()); }
-            return sb.ToString();
+            if (Where != null)
+            {
+                Where.AppendTo(sb);
+                sb.AppendLine();
+            }
         }
     }
 }

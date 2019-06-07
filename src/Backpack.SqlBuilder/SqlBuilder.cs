@@ -21,10 +21,14 @@ namespace Backpack.SqlBuilder
             set => _dialect = value;
         }
 
-        public static SqlSelectBuilder Select => new SqlSelectBuilder(DefaultDialect);
+        public static SqlSelectBuilder Select(ISqlDialect dialect = null) => new SqlSelectBuilder(dialect ?? DefaultDialect);
 
-        public static SqlInsertCommand Insert => new SqlInsertCommand(DefaultDialect);
+        public static SqlInsertCommand Insert(ISqlDialect dialect = null) => new SqlInsertCommand(dialect ?? DefaultDialect);
 
-        public static CreateTable CreateTable => new CreateTable(DefaultDialect);
+        public static SqlUpdateCommand Update(ISqlDialect dialect = null) => new SqlUpdateCommand(dialect ?? DefaultDialect);
+
+        public static CreateTable CreateTable(ISqlDialect dialect = null) => new CreateTable(dialect ?? DefaultDialect);
+
+
     }
 }

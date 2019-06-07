@@ -106,9 +106,9 @@ namespace Backpack.SqlBuilder.Test
             var builder = new CreateTable(Dialect)
             {
                 TableName = tableName,
-                Columns = collumnList,
-                TableConstraints = tableConstrList
-            };
+            }
+            .WithColumns(collumnList)
+            .WithTableConstraints(tableConstrList);
 
             var sql = builder.ToString();
 
