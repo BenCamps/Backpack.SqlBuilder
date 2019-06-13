@@ -108,5 +108,66 @@ namespace Backpack.SqlBuilder.Sqlite
                     { throw new ArgumentException("value:" + sqlType + " is invalid", "sqlType"); }
             }
         }
+
+        public override Type MapSQLtypeToSystemType(string sqlType)
+        {
+            if (sqlType == null) { throw new ArgumentNullException("sqlType"); }
+            sqlType = sqlType.ToUpperInvariant();
+            switch (sqlType)
+            {
+                case SqliteDataType.BLOB:
+                    { return typeof(byte[]); }
+                case SqliteDataType.INTEGER:
+                    { return typeof(int); }
+                case SqliteDataType.FLOAT:
+                    { return typeof(float); }
+                case SqliteDataType.DOUBLE:
+                case SqliteDataType.REAL:
+                    { return typeof(double); }
+                case SqliteDataType.TEXT:
+                    { return typeof(string); }
+                case "BOOL":
+                case SqliteDataType.BOOLEAN:
+                    { return typeof(bool); }
+                case SqliteDataType.DATATIME:
+                    { return typeof(DateTime); }
+                default:
+                    { throw new ArgumentException("value:" + sqlType + " is invalid", "sqlType"); }
+            }
+        }
+
+        public override string MapSystemTypeToSQLtype(Type type)
+        {
+            if (type == null) { throw new ArgumentNullException("type"); }
+            type = Nullable.GetUnderlyingType(type) ?? type;
+
+            var typeCode = Type.GetTypeCode(type);
+            switch(typeCode)
+            {
+                case TypeCode.Byte:
+                case TypeCode.Boolean:
+                    { return SqliteDataType.BOOLEAN; }
+                case TypeCode.Char:
+                case TypeCode.String:
+                    { return SqliteDataType.TEXT; }
+                case TypeCode.DateTime:
+                    { return SqliteDataType.DATATIME; }
+                case TypeCode.Decimal:
+                case TypeCode.Double:
+                    { return SqliteDataType.DOUBLE; }
+                case TypeCode.Single:
+                    { return SqliteDataType.FLOAT; }
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                    { return SqliteDataType.INTEGER; }
+                default:
+                    { throw new ArgumentException("value:" + type + " is invalid", "type"); }
+
+            }
+        }
     }
 }

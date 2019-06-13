@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 
 namespace Backpack.SqlBuilder
 {
@@ -13,5 +14,9 @@ namespace Backpack.SqlBuilder
         string MapDbTypeToSQLType(DbType type);
 
         DbType MapSQLtypeToDbType(string sqlType);
+
+        Type MapSQLtypeToSystemType(string sqlType);
+
+        string MapSystemTypeToSQLtype(Type type);
     }
 }
