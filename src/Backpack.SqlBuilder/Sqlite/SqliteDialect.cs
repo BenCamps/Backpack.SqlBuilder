@@ -84,7 +84,7 @@ namespace Backpack.SqlBuilder.Sqlite
         public override DbType MapSQLtypeToDbType(string sqlType)
         {
             if (sqlType == null) { throw new ArgumentNullException("sqlType"); }
-            sqlType = sqlType.ToUpperInvariant();
+            sqlType = sqlType.ToUpper(System.Globalization.CultureInfo.InvariantCulture);
             switch (sqlType)
             {
                 case SqliteDataType.BLOB:
@@ -112,7 +112,7 @@ namespace Backpack.SqlBuilder.Sqlite
         public override Type MapSQLtypeToSystemType(string sqlType)
         {
             if (sqlType == null) { throw new ArgumentNullException("sqlType"); }
-            sqlType = sqlType.ToUpperInvariant();
+            sqlType = sqlType.ToUpper(System.Globalization.CultureInfo.InvariantCulture);
             switch (sqlType)
             {
                 case SqliteDataType.BLOB:
