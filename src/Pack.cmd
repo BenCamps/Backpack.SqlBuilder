@@ -12,13 +12,15 @@ SET me=%~n0
 ::directory of script
 SET parent=%~dp0
 
+SET msbuild="%parent%tools\msbuild.cmd"
+
 IF NOT DEFINED build_config SET build_config="Release"
 
 IF NOT DEFINED packageOutputDir SET packageOutputDir=%parent%..\PackageOutput
 
 call "%parent%build.cmd"
 
-dotnet pack -c %build_config% --include-source --nobuild -o %packageOutputDir% %parent%Backpack.SqlBuilder\Backpack.SqlBuilder.csproj
+call %msbuild% -t:pack /p:PackageOutputPath=%packageOutputDir%;Configuration=%build_config% %parent%Backpack.SqlBuilder\Backpack.SqlBuilder.csproj
 
 ::if invoked from windows explorer, pause
 IF "%interactive%"=="0" PAUSE
