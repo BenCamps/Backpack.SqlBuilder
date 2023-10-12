@@ -1,11 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33717.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backpack.SqlBuilder", "Backpack.SqlBuilder\Backpack.SqlBuilder.csproj", "{84A13E31-3EA0-4978-B28E-B1CACB46577E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backpack.SqlBuilder.Test", "Backpack.SqlBuilder.Test\Backpack.SqlBuilder.Test.csproj", "{D670D86F-BC4F-4C87-97A1-A95DBE07120B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{141A25D0-067C-4BC3-ADEA-01CF193C52ED}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Build.cmd = Build.cmd
+		Directory.Build.props = Directory.Build.props
+		Pack.cmd = Pack.cmd
+		Test.cmd = Test.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

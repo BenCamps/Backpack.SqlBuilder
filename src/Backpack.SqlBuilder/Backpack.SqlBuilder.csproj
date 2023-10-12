@@ -23,7 +23,7 @@
 		<PackageTags>sqlbuilder;fluent;cross-platfrom;sqlite;</PackageTags>
 		<Authors>Benjamin Campbell</Authors>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/BenCamps/Backpack.SqlBuilder</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/BenCamps/Backpack.SqlBuilder.git</RepositoryUrl>
