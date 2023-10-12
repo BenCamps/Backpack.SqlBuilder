@@ -96,7 +96,7 @@ namespace Backpack.SqlBuilder.Sqlite
                 case "BOOL":
                 case SqliteDataType.BOOLEAN:
                     { return DbType.Boolean; }
-                case SqliteDataType.DATATIME:
+                case SqliteDataType.DATETIME:
                     { return DbType.DateTime; }
                 case SqliteDataType.DOUBLE:
                     { return DbType.Double; }
@@ -127,7 +127,7 @@ namespace Backpack.SqlBuilder.Sqlite
                 case "BOOL":
                 case SqliteDataType.BOOLEAN:
                     { return typeof(bool); }
-                case SqliteDataType.DATATIME:
+                case SqliteDataType.DATETIME:
                     { return typeof(DateTime); }
                 default:
                     { throw new ArgumentException("value:" + sqlType + " is invalid", "sqlType"); }
@@ -149,7 +149,7 @@ namespace Backpack.SqlBuilder.Sqlite
                 case TypeCode.String:
                     { return SqliteDataType.TEXT; }
                 case TypeCode.DateTime:
-                    { return SqliteDataType.DATATIME; }
+                    { return SqliteDataType.DATETIME; }
                 case TypeCode.Decimal:
                 case TypeCode.Double:
                     { return SqliteDataType.DOUBLE; }

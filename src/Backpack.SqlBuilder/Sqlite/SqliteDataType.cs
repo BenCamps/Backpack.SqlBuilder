@@ -9,7 +9,7 @@
         public const string NUMERIC = "NUMERIC";
 
         public const string BOOLEAN = "BOOLEAN";
-        public const string DATATIME = "DATETIME";
+        public const string DATETIME = "DATETIME";
 
         public const string DOUBLE = "DOUBLE";
         public const string FLOAT = "FLOAT";
