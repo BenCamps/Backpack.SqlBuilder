@@ -11,7 +11,7 @@ namespace Backpack.SqlBuilder
             return sb.ToString();
         }
 
-        protected abstract void AppendTo(StringBuilder sb, ISqlDialect sqlDialect);
+        protected abstract void AppendTo(StringBuilder sb, ISqlDialect dialect);
 
         void IAppendableElemant.AppendTo(StringBuilder sb, ISqlDialect dialect)
         {

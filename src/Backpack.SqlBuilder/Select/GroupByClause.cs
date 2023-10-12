@@ -22,7 +22,7 @@ namespace Backpack.SqlBuilder
 
         protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
-            if (Expressions != null && Expressions.Count() != 0)
+            if (Expressions != null && Expressions.Any())
             {
                 sb.Append("GROUP BY ");
                 bool first = true;

@@ -175,7 +175,7 @@ namespace Backpack.SqlBuilder
             else
             {
                 sb.Append("REFERENCES " + References + " ");
-                if (ReferenceColumnNames != null && ReferenceColumnNames.Count() > 0)
+                if (ReferenceColumnNames != null && ReferenceColumnNames.Any())
                 {
                     sb.Append("( ");
                     var first = true;

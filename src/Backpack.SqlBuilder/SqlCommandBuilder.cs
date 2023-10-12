@@ -8,11 +8,6 @@ namespace Backpack.SqlBuilder
         {
         }
 
-        //protected void AppendTo(StringBuilder sb)
-        //{
-        //    AppendTo(sb, Dialect);
-        //}
-
         protected abstract void AppendTo(StringBuilder sb, ISqlDialect dialect);
 
         void IAppendableElemant.AppendTo(StringBuilder sb, ISqlDialect dialect) => AppendTo(sb, dialect);

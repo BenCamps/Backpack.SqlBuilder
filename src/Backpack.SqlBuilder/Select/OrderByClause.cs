@@ -27,7 +27,7 @@ namespace Backpack.SqlBuilder
 
         protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
-            if (OrderingTerms != null && OrderingTerms.Count() > 0)
+            if (OrderingTerms != null && OrderingTerms.Any())
             {
                 sb.Append(" ORDER BY ");
                 bool first = true;
