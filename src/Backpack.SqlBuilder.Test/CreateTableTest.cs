@@ -40,7 +40,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = builder.ToString();
 
             VerifyCommandSyntex(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
         }
 
         [Theory]
@@ -64,7 +64,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = builder.ToString();
 
             VerifyCommandSyntex(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
 
         }
 
@@ -86,7 +86,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = builder.ToString();
 
             VerifyCommandSyntex(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
 
         }
 
@@ -113,7 +113,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = builder.ToString();
 
             VerifyCommandSyntex(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = builder.ToString();
 
             VerifyCommandSyntex(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
         }
     }
 }

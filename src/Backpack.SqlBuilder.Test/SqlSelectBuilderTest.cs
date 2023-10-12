@@ -25,7 +25,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = clause.ToString();
             Output.WriteLine(sql);
 
-            sql.ShouldBeEquivalentTo(result);
+            sql.Should().BeEquivalentTo(result);
         }
 
         [Theory]
@@ -38,7 +38,7 @@ namespace Backpack.SqlBuilder.Test
             var sql = clause.ToString();
             Output.WriteLine(sql);
 
-            sql.ShouldBeEquivalentTo(result);
+            sql.Should().BeEquivalentTo(result);
         }
 
         [Fact]
@@ -54,9 +54,9 @@ namespace Backpack.SqlBuilder.Test
             Output.WriteLine(clause2.ToString());
             Output.WriteLine(reslut.ToString());
 
-            clause1.ToString().ShouldBeEquivalentTo("WHERE expr1");
-            clause2.ToString().ShouldBeEquivalentTo("WHERE expr2");
-            reslut.ToString().ShouldBeEquivalentTo("WHERE expr1 AND expr2");
+            clause1.ToString().Should().BeEquivalentTo("WHERE expr1");
+            clause2.ToString().Should().BeEquivalentTo("WHERE expr2");
+            reslut.ToString().Should().BeEquivalentTo("WHERE expr1 AND expr2");
         }
 
         [Theory]
@@ -70,7 +70,7 @@ namespace Backpack.SqlBuilder.Test
 
             var sql = clause.ToString();
             Output.WriteLine(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
         }
 
         [Theory]
@@ -94,7 +94,7 @@ namespace Backpack.SqlBuilder.Test
 
             var sql = builder.ToString();
             Output.WriteLine(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
 
             VerifyCommandSyntex(sql + ";");
         }
@@ -116,7 +116,7 @@ namespace Backpack.SqlBuilder.Test
 
             var sql = builder.ToString();
             Output.WriteLine(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
 
             VerifyCommandSyntex(sql + ";");
         }
@@ -142,7 +142,7 @@ namespace Backpack.SqlBuilder.Test
 
             var sql = builder.ToString();
             Output.WriteLine(sql);
-            sql.ShouldBeEquivalentTo(expected);
+            sql.Should().BeEquivalentTo(expected);
 
             VerifyCommandSyntex(sql + ";");
         }
