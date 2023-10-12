@@ -39,13 +39,13 @@ namespace Backpack.SqlBuilder
             this.Alias = alias;
         }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (!string.IsNullOrEmpty(Table)) { sb.Append(Table); }
             else if (SubQuery != null)
             {
                 sb.Append("(");
-                SubQuery.AppendTo(sb);
+                ((IAppendableElemant)SubQuery).AppendTo(sb, dialect);
                 sb.Append(")");
             }
 

@@ -169,5 +169,17 @@ namespace Backpack.SqlBuilder.Test
 
             VerifyCommandSyntex(sql + ";");
         }
+
+        [Fact]
+        public void FluentInterfaceTest2()
+        {
+            var selectCommand = SqlBuilder.Select().From("TableA")
+                .Join("TableB", "USING (col1)")
+                .Where("x > 1")
+                .GroupBy("col1")
+                .Limit(1);
+
+            var commandText = selectCommand.ToSql();
+        }
     }
 }

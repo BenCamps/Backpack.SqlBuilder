@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Backpack.SqlBuilder
 {
     public class SqlUpdateCommand : SqlCommandBuilder
     {
-        public SqlUpdateCommand()
+        public SqlUpdateCommand(ISqlDialect dialect = null) : base(dialect)
         {
         }
 
-        public SqlUpdateCommand(ISqlDialect dialect) : base(dialect)
+        public SqlUpdateCommand(string tableName, OnConflictOption conflictOption = OnConflictOption.Default, ISqlDialect dialect = null) : base(dialect)
         {
+            TableName = tableName ?? throw new ArgumentNullException(nameof(tableName));
+            ConflictOption = conflictOption;
         }
 
         public string TableName { get; set; }
@@ -22,9 +25,15 @@ namespace Backpack.SqlBuilder
 
         public IEnumerable<KeyValuePair<string, object>> Values { get; set; }
 
-        public WhereClause Where { get; set; }
+        public WhereClause WhereClause { get; set; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+        public ICompleatedSqlStatment Where(string whereClause)
+        {
+            WhereClause = new WhereClause(whereClause);
+            return this;
+        }
+
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             sb.AppendLine("UPDATE");
             if (ConflictOption != OnConflictOption.Default)
@@ -50,9 +59,9 @@ namespace Backpack.SqlBuilder
                 }
             }
 
-            if (Where != null)
+            if (WhereClause != null)
             {
-                Where.AppendTo(sb);
+                ((IAppendableElemant)WhereClause).AppendTo(sb, dialect);
                 sb.AppendLine();
             }
         }

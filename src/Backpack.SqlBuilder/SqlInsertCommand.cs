@@ -6,12 +6,14 @@ namespace Backpack.SqlBuilder
 {
     public class SqlInsertCommand : SqlCommandBuilder
     {
-        public SqlInsertCommand()
+        public SqlInsertCommand(ISqlDialect dialect = null) : base(dialect)
         {
         }
 
-        public SqlInsertCommand(ISqlDialect dialect) : base(dialect)
+        public SqlInsertCommand(string tableName, OnConflictOption conflictOption = OnConflictOption.Default, ISqlDialect dialect = null) : base(dialect)
         {
+            TableName = tableName ?? throw new ArgumentNullException(nameof(tableName));
+            ConflictOption = conflictOption;
         }
 
         public string TableName { get; set; }
@@ -22,7 +24,7 @@ namespace Backpack.SqlBuilder
         public IEnumerable<String> ValueExpressions { get; set; }
         public SqlSelectBuilder SelectExpression { get; set; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             sb.Append("INSERT");
             if (ConflictOption != OnConflictOption.Default)
@@ -95,10 +97,8 @@ namespace Backpack.SqlBuilder
                 }
                 else if (SelectExpression != null)
                 {
-
-
                     sb.AppendLine();
-                    SelectExpression.AppendTo(sb, dialect);
+                    ((IAppendableElemant)SelectExpression).AppendTo(sb, dialect);
                 }
                 else
                 {

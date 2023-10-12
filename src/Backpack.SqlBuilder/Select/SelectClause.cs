@@ -2,15 +2,20 @@
 
 namespace Backpack.SqlBuilder
 {
-    public abstract class SelectClause
+    public abstract class SelectClause : IAppendableElemant
     {
         public override string ToString()
         {
             var sb = new StringBuilder();
-            AppendTo(sb);
+            AppendTo(sb, SqlBuilder.DefaultDialect);
             return sb.ToString();
         }
 
-        public abstract void AppendTo(StringBuilder sb);
+        protected abstract void AppendTo(StringBuilder sb, ISqlDialect sqlDialect);
+
+        void IAppendableElemant.AppendTo(StringBuilder sb, ISqlDialect dialect)
+        {
+            AppendTo(sb, dialect);
+        }
     }
 }

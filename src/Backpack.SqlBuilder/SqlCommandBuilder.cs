@@ -2,27 +2,31 @@
 
 namespace Backpack.SqlBuilder
 {
-    public abstract class SqlCommandBuilder : SqlBuilder
+    public abstract class SqlCommandBuilder : SqlBuilder, IAppendableElemant, ICompleatedSqlStatment
     {
-
-        protected SqlCommandBuilder() :base() { }
-
         protected SqlCommandBuilder(ISqlDialect dialect) : base(dialect)
         {
         }
 
-        public void AppendTo(StringBuilder sb)
-        {
-            AppendTo(sb, Dialect);
-        }
+        //protected void AppendTo(StringBuilder sb)
+        //{
+        //    AppendTo(sb, Dialect);
+        //}
 
-        public abstract void AppendTo(StringBuilder sb, ISqlDialect dialect);
+        protected abstract void AppendTo(StringBuilder sb, ISqlDialect dialect);
+
+        void IAppendableElemant.AppendTo(StringBuilder sb, ISqlDialect dialect) => AppendTo(sb, dialect);
 
         public override string ToString()
         {
             var sb = new StringBuilder();
-            AppendTo(sb);
+            AppendTo(sb, Dialect);
             return sb.ToString();
+        }
+
+        string ICompleatedSqlStatment.ToSql()
+        {
+            return ToString();
         }
     }
 }

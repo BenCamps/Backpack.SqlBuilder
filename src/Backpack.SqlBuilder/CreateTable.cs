@@ -20,15 +20,16 @@ namespace Backpack.SqlBuilder
 
         public SqlSelectBuilder SelectStatment { get; set; }
 
-        public CreateTable()
+        public CreateTable(ISqlDialect dialect = null) : base(dialect)
         {
         }
 
-        public CreateTable(ISqlDialect dialect) : base(dialect)
+        public CreateTable(string tableName, ISqlDialect dialect = null) : base(dialect)
         {
+            TableName = tableName ?? throw new ArgumentNullException(nameof(tableName));
         }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             sb.Append("CREATE");
             if (Temp) { sb.Append(" TEMP"); }
@@ -40,7 +41,7 @@ namespace Backpack.SqlBuilder
             if (SelectStatment != null)
             {
                 sb.Append(" AS ");
-                SelectStatment.AppendTo(sb, dialect);
+                ((IAppendableElemant)SelectStatment).AppendTo(sb, dialect);
             }
             else
             {
@@ -59,7 +60,7 @@ namespace Backpack.SqlBuilder
                     {
                         if (!first) { sb.Append(", "); }
                         else { first = false; }
-                        constr.AppendTo(sb, dialect);
+                        ((IAppendableElemant)constr).AppendTo(sb, dialect);
                     }
                 }
 

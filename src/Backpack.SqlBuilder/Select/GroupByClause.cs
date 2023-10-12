@@ -20,7 +20,7 @@ namespace Backpack.SqlBuilder
             Expressions = groupByExprs;
         }
 
-        public override void AppendTo(StringBuilder sb)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (Expressions != null && Expressions.Count() != 0)
             {
