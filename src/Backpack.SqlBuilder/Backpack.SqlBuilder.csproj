@@ -1,57 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Label="Assembly Info">
-    <Version>1.1.5</Version>
-    <RootNamespace>Backpack.SqlBuilder</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup Label="Assembly Info">
+		<AssemblyName>Backpack.SqlBuilder</AssemblyName>
+		<Version>1.1.5</Version>
+		<RootNamespace>Backpack.SqlBuilder</RootNamespace>
+	</PropertyGroup>
 
-  <PropertyGroup Label="Build Options">
-    <TargetFrameworks>net40;netstandard2.0;net35-cf</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup Label="Build Options">
+		<TargetFrameworks>net462;netstandard2.0;net60;</TargetFrameworks>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <PropertyGroup Label="Pack Options">
-    <!--<PackageOutputPath>$(OutputPath)</PackageOutputPath>-->
-    <!--include pdb files in the package, to give users debug symbols-->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
+	<PropertyGroup Label="Pack Options">
+		<!--<PackageOutputPath>$(OutputPath)</PackageOutputPath>-->
+		<!--include pdb files in the package, to give users debug symbols-->
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
 
-  <PropertyGroup Label="Package Info">
-    <Title>$(AssemblyTitle)</Title>
-    <Description>A sql builder with a fluent interface</Description>
-    <PackageTags>sqlbuilder fluent cross-platfrom</PackageTags>
-    <Authors>Ben Campbell</Authors>
-    <!--<PackageVersion>$(Version)</PackageVersion>-->
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <!--<PackageReleaseNotes></PackageReleaseNotes>-->
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/BenCamps/Backpack.SqlBuilder</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/BenCamps/Backpack.SqlBuilder.git</RepositoryUrl>
-  </PropertyGroup>
+	<PropertyGroup Label="Package Info">
+		<Title>$(AssemblyTitle)</Title>
+		<Description>A sql builder with a fluent interface</Description>
+		<PackageTags>sqlbuilder;fluent;cross-platfrom;sqlite;</PackageTags>
+		<Authors>Benjamin Campbell</Authors>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/BenCamps/Backpack.SqlBuilder</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/BenCamps/Backpack.SqlBuilder.git</RepositoryUrl>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net35-cf'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>CompactFramework</TargetFrameworkProfile>
-    <DefineConstants>$(DefineConstants);NET35_CF;WindowsCE</DefineConstants>
-    <DisableImplicitFrameworkReferences>True</DisableImplicitFrameworkReferences>
-    <NoStdLib>True</NoStdLib>
-    <NoConfig>true</NoConfig>
-    <FileAlignment>512</FileAlignment>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
-    <Optimize>False</Optimize>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net35-cf'">
-    <Reference Include="mscorlib, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-    <Reference Include="System, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-    <Reference Include="System.Data, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-    <Reference Include="System.Runtime.Serialization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-    <Reference Include="System.Xml, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-    <Reference Include="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=969db8053d3322ac" />
-  </ItemGroup>
-  
 </Project>
