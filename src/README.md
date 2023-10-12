@@ -11,9 +11,11 @@ It supports the following common sql commands
 
 # Example
 ```cs
-var selectcommand = new SqlSelectBuilder(){Source = new TableOrSubQuery("TableA")}
+var selectcommand = SqlBuilder.Select()
+    .From("TableA")
     .Join("TableB", "USING (Col1)")
     .Where("x >1")
     .GroupBy("Col1", "Col2")
-    .Limit(1);
+    .Limit(1)
+    .ToSql();
 ```
