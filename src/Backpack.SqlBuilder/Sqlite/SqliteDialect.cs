@@ -140,7 +140,7 @@ namespace Backpack.SqlBuilder.Sqlite
             type = Nullable.GetUnderlyingType(type) ?? type;
 
             var typeCode = Type.GetTypeCode(type);
-            switch(typeCode)
+            switch (typeCode)
             {
                 case TypeCode.Byte:
                 case TypeCode.Boolean:
@@ -164,7 +164,6 @@ namespace Backpack.SqlBuilder.Sqlite
                     { return SqliteDataType.INTEGER; }
                 default:
                     { throw new ArgumentException("value:" + type + " is invalid", "type"); }
-
             }
         }
     }

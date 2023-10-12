@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace Backpack.Sqlbuilder
@@ -9,9 +8,9 @@ namespace Backpack.Sqlbuilder
         public static StringBuilder Join(this StringBuilder @this, string seporator, IEnumerable<string> elements)
         {
             var first = false;
-            foreach(var e in elements)
+            foreach (var e in elements)
             {
-                if(first == false) { @this.Append(seporator); }
+                if (first == false) { @this.Append(seporator); }
                 else { first = false; }
                 @this.Append(e);
             }
