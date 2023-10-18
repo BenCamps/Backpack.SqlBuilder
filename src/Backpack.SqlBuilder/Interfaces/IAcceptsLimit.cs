@@ -1,6 +1,6 @@
 ﻿namespace Backpack.SqlBuilder
 {
-    public interface IAcceptsLimit
+    public interface IAcceptsLimit : ICompleatedSqlStatment
     {
         void Accept(LimitClause limitClause);
     }

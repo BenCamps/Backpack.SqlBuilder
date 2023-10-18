@@ -19,7 +19,7 @@ namespace Backpack.SqlBuilder
 
         public string Value { get; set; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
             sb.Append(Value);
@@ -33,7 +33,8 @@ namespace Backpack.SqlBuilder
 
         public string ConflictOption { get; set; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
             sb.Append("UNIQUE ( ");
@@ -75,7 +76,8 @@ namespace Backpack.SqlBuilder
 
         public string ConflictOption { get; set; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
             sb.Append("PRIMARY KEY ( ");
@@ -117,7 +119,8 @@ namespace Backpack.SqlBuilder
         public CheckConstraint(string expression)
         { Expression = expression; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             sb.Append("CHECK (").Append(Expression).Append(")");
         }
@@ -140,7 +143,8 @@ namespace Backpack.SqlBuilder
 
         public string ForeignKeyClause { get; set; }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (!string.IsNullOrEmpty(ConstraintName)) { sb.Append("CONSTRAINT ").Append(ConstraintName).Append(" "); }
             sb.Append("FOREIGN KEY ( ");
@@ -175,7 +179,8 @@ namespace Backpack.SqlBuilder
             else
             {
                 sb.Append("REFERENCES " + References + " ");
-                if (ReferenceColumnNames != null && ReferenceColumnNames.Count() > 0)
+
+                if (ReferenceColumnNames != null && ReferenceColumnNames.Any())
                 {
                     sb.Append("( ");
                     var first = true;
@@ -207,7 +212,5 @@ namespace Backpack.SqlBuilder
                 sb.Append(deferable);
             }
         }
-
-        
     }
 }

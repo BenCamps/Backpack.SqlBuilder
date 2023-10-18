@@ -22,7 +22,7 @@ namespace Backpack.SqlBuilder
         public ColumnInfo(string name) : this(name, DbType.AnsiString)
         { }
 
-        public ColumnInfo(string name, string type) :this()
+        public ColumnInfo(string name, string type) : this()
         {
             Name = name;
             Type = type;

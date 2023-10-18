@@ -9,7 +9,8 @@ namespace Backpack.SqlBuilder
             return new WhereClause(left.Expression + " AND " + right.Expression);
         }
 
-        public WhereClause() { }
+        public WhereClause()
+        { }
 
         public WhereClause(string expression)
         {
@@ -18,7 +19,7 @@ namespace Backpack.SqlBuilder
 
         public string Expression { get; set; }
 
-        public override void AppendTo(StringBuilder sb)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect sqlDialect)
         {
             if (!string.IsNullOrEmpty(Expression))
             {

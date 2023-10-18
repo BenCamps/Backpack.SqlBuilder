@@ -1,33 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework) == 'net452'">
-    <DefineConstants>$(DefineConstants);SYSTEM_DATA_SQLITE</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
-    <DefineConstants>$(DefineConstants);MICROSOFT_DATA_SQLITE</DefineConstants>
+	<DefineConstants>$(DefineConstants);MICROSOFT_DATA_SQLITE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="$(DefineConstants.Contains('SYSTEM_DATA_SQLITE'))">
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.108" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.2.4" />
+  <ItemGroup Condition="$(DefineConstants.Contains('MICROSOFT_DATA_SQLITE'))">
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.12" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="4.19.4" />
-
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1"/>
+    <PackageReference Include="Bogus" Version="34.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Backpack.SqlBuilder\Backpack.SqlBuilder.csproj" />
   </ItemGroup>
+
 </Project>

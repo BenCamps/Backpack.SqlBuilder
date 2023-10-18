@@ -18,15 +18,21 @@ namespace Backpack.SqlBuilder
 
         public IList<WhereClause> Clauses { get; set; }
 
-        public SqlSelectBuilder()
+        public SqlSelectBuilder(ISqlDialect dialect = null) : base(dialect)
         {
         }
 
-        public SqlSelectBuilder(ISqlDialect dialect) : base(dialect)
+        public IAcceptsJoin From(string tableName)
         {
+            if (string.IsNullOrWhiteSpace(tableName)) { throw new ArgumentException($"'{nameof(tableName)}' cannot be null or whitespace.", nameof(tableName)); }
+
+            if (Source != null) throw new InvalidOperationException("Select Source already Set");
+
+            Source = new TableOrSubQuery(tableName);
+            return this;
         }
 
-        public override void AppendTo(StringBuilder sb, ISqlDialect dialect)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (ResultColumns == null) { throw new ArgumentNullException("ResultColumns"); }
 
@@ -36,34 +42,34 @@ namespace Backpack.SqlBuilder
             if (Source != null)
             {
                 sb.Append(" FROM ");
-                Source.AppendTo(sb, dialect);
+                ((IAppendableElemant)Source).AppendTo(sb, dialect);
             }
 
             foreach (var joinCommand in JoinClauses)
             {
                 sb.Append(" ");
-                joinCommand.AppendTo(sb);
+                ((IAppendableElemant)joinCommand).AppendTo(sb, dialect);
             }
 
             if (WhereClause != null)
             {
                 sb.Append(" ");
-                WhereClause.AppendTo(sb);
+                ((IAppendableElemant)WhereClause).AppendTo(sb, dialect);
             }
             if (GroupByClause != null)
             {
                 sb.Append(" ");
-                GroupByClause.AppendTo(sb);
+                ((IAppendableElemant)GroupByClause).AppendTo(sb, dialect);
             }
             if (OrderByClause != null)
             {
                 sb.Append(" ");
-                OrderByClause.AppendTo(sb);
+                ((IAppendableElemant)OrderByClause).AppendTo(sb, dialect);
             }
             if (LimitClause != null)
             {
                 sb.Append(" ");
-                LimitClause.AppendTo(sb);
+                ((IAppendableElemant)LimitClause).AppendTo(sb, dialect);
             }
         }
 

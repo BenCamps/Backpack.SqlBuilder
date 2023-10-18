@@ -1,11 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33717.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backpack.SqlBuilder", "Backpack.SqlBuilder\Backpack.SqlBuilder.csproj", "{84A13E31-3EA0-4978-B28E-B1CACB46577E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backpack.SqlBuilder.Test", "Backpack.SqlBuilder.Test\Backpack.SqlBuilder.Test.csproj", "{D670D86F-BC4F-4C87-97A1-A95DBE07120B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{141A25D0-067C-4BC3-ADEA-01CF193C52ED}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Build.cmd = Build.cmd
+		Directory.Build.props = Directory.Build.props
+		Pack.cmd = Pack.cmd
+		README.md = README.md
+		Test.cmd = Test.cmd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackPack.SqlBuilder.Sqlite", "BackPack.SqlBuilder.Sqlite\BackPack.SqlBuilder.Sqlite.csproj", "{83E8B7E0-8464-436D-B381-F064E64BB325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backpack.Sqlbuilder.Sqlite.Test", "Backpack.Sqlbuilder.Sqlite.Test\Backpack.Sqlbuilder.Sqlite.Test.csproj", "{734982C2-AAF8-4299-BFE4-4E2656C7D9B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{1E445CEE-9A46-49F2-8275-B4D24DE7570D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Backpack.Sqlbuilder.TestCommon", "Backpack.Sqlbuilder.TestCommon\Backpack.Sqlbuilder.TestCommon.shproj", "{E796E556-4A0D-4DCD-BF84-CE8B5A718778}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,11 +39,28 @@ Global
 		{D670D86F-BC4F-4C87-97A1-A95DBE07120B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D670D86F-BC4F-4C87-97A1-A95DBE07120B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D670D86F-BC4F-4C87-97A1-A95DBE07120B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83E8B7E0-8464-436D-B381-F064E64BB325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83E8B7E0-8464-436D-B381-F064E64BB325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83E8B7E0-8464-436D-B381-F064E64BB325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83E8B7E0-8464-436D-B381-F064E64BB325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{734982C2-AAF8-4299-BFE4-4E2656C7D9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734982C2-AAF8-4299-BFE4-4E2656C7D9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734982C2-AAF8-4299-BFE4-4E2656C7D9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734982C2-AAF8-4299-BFE4-4E2656C7D9B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D670D86F-BC4F-4C87-97A1-A95DBE07120B} = {1E445CEE-9A46-49F2-8275-B4D24DE7570D}
+		{734982C2-AAF8-4299-BFE4-4E2656C7D9B9} = {1E445CEE-9A46-49F2-8275-B4D24DE7570D}
+		{E796E556-4A0D-4DCD-BF84-CE8B5A718778} = {1E445CEE-9A46-49F2-8275-B4D24DE7570D}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {697B096A-7B3E-488A-BC8B-C8732CAD1EFC}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Backpack.Sqlbuilder.TestCommon\Backpack.Sqlbuilder.TestCommon.projitems*{734982c2-aaf8-4299-bfe4-4e2656c7d9b9}*SharedItemsImports = 5
+		Backpack.Sqlbuilder.TestCommon\Backpack.Sqlbuilder.TestCommon.projitems*{e796e556-4a0d-4dcd-bf84-ce8b5a718778}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

@@ -20,31 +20,17 @@ namespace Backpack.SqlBuilder
 
         public SqlSelectBuilder SelectStatment { get; set; }
 
-        public CreateTable()
+        public CreateTable(ISqlDialect dialect = null) : base(dialect)
         {
         }
 
-        public CreateTable(ISqlDialect dialect) : base(dialect)
+        public CreateTable(string tableName, ISqlDialect dialect = null) : base(dialect)
         {
+            TableName = tableName ?? throw new ArgumentNullException(nameof(tableName));
         }
 
-        public override string ToString()
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
-            return ToString(Dialect ?? SqlDialect.DefaultDialect);
-        }
-
-        public void WithColumns(IEnumerable<ColumnInfo> columns)
-        {
-            foreach (var c in columns)
-            {
-                Columns.Add(c);
-            }
-        }
-
-        public override void AppendTo(StringBuilder sb)
-        {
-            var dialect = Dialect;
-
             sb.Append("CREATE");
             if (Temp) { sb.Append(" TEMP"); }
             sb.Append(" TABLE ");
@@ -55,7 +41,7 @@ namespace Backpack.SqlBuilder
             if (SelectStatment != null)
             {
                 sb.Append(" AS ");
-                SelectStatment.AppendTo(sb);
+                ((IAppendableElemant)SelectStatment).AppendTo(sb, dialect);
             }
             else
             {
@@ -74,7 +60,7 @@ namespace Backpack.SqlBuilder
                     {
                         if (!first) { sb.Append(", "); }
                         else { first = false; }
-                        constr.AppendTo(sb, dialect);
+                        ((IAppendableElemant)constr).AppendTo(sb, dialect);
                     }
                 }
 
@@ -87,6 +73,15 @@ namespace Backpack.SqlBuilder
 
     public static class CreateTableExtentions
     {
+        public static CreateTable WithColumns(this CreateTable @this, IEnumerable<ColumnInfo> columns)
+        {
+            foreach (var c in columns)
+            {
+                @this.Columns.Add(c);
+            }
+            return @this;
+        }
+
         public static CreateTable WithTableConstraints(this CreateTable @this, IEnumerable<string> tableConstraints)
         {
             foreach (var tc in tableConstraints)

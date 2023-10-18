@@ -2,9 +2,14 @@
 
 namespace Backpack.SqlBuilder
 {
-    public abstract class CommandElement
+    public abstract class CommandElement : IAppendableElemant
     {
-        public abstract void AppendTo(StringBuilder sb, ISqlDialect dialect);
+        protected abstract void AppendTo(StringBuilder sb, ISqlDialect dialect);
+
+        void IAppendableElemant.AppendTo(StringBuilder sb, ISqlDialect dialect)
+        {
+            AppendTo(sb, dialect);
+        }
 
         public override string ToString()
         {

@@ -13,7 +13,7 @@ namespace Backpack.SqlBuilder
             Offset = offset;
         }
 
-        public override void AppendTo(StringBuilder sb)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             sb.Append("LIMIT " + LimitSize.ToString());
             if (Offset > 0)

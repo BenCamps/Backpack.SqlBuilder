@@ -70,10 +70,10 @@ namespace Backpack.SqlBuilder
             return @this;
         }
 
-        public static void Limit(this IAcceptsLimit @this, int limit, int offset)
+        public static ICompleatedSqlStatment Limit(this IAcceptsLimit @this, int limit, int offset = 0)
         {
             @this.Accept(new LimitClause(limit, offset));
-            //return @this;
+            return @this;
         }
     }
 }

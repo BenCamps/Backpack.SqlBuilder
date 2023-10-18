@@ -24,7 +24,7 @@ namespace Backpack.SqlBuilder
         {
         }
 
-        public override void AppendTo(StringBuilder sb)
+        protected override void AppendTo(StringBuilder sb, ISqlDialect dialect)
         {
             if (JoinType != null) { sb.Append(JoinType).Append(" "); }
             sb.Append("JOIN ").Append(Source).Append(" ").Append(JoinConstraint);

@@ -1,0 +1,24 @@
+<Project>
+
+	<PropertyGroup>
+		<IsTestProject Condition=" '$(IsTestProject)' == '' AND
+        ( $(MSBuildProjectName.EndsWith('Tests')) OR
+          $(MSBuildProjectName.EndsWith('.Test')) ) ">true</IsTestProject>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(IsTestProject) == 'true'">
+		<TargetFramework>net60</TargetFramework>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup Condition="$(IsTestProject) == 'true'">
+		
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
+		<PackageReference Include="xunit" Version="2.5.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.1" />
+		<PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
+		
+		<PackageReference Include="Bogus" Version="*"/>
+		<PackageReference Include="FluentAssertions" Version="*" />
+	</ItemGroup>
+</Project>
