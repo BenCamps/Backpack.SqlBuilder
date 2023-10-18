@@ -1,12 +1,9 @@
-﻿using Backpack.SqlBuilder;
-using Backpack.SqlBuilder.Test.Util;
-using System.Collections.Generic;
-using Xunit;
+﻿using BackPack.SqlBuilder.Sqlite;
 using Xunit.Abstractions;
 
 namespace Backpack.SqlBuilder.Test
 {
-    public class SqlInsertCommandTest : TestBase
+    public class SqlInsertCommandTest : SqliteTestBase
     {
         public SqlInsertCommandTest(ITestOutputHelper output) : base(output)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Backpack.SqlBuilder
@@ -42,15 +43,19 @@ namespace Backpack.SqlBuilder
 
             if (Values != null)
             {
-                bool first = true;
-                foreach (var pair in Values)
-                {
-                    if (!first) { sb.AppendLine(","); }
-                    sb.Append("SET ").Append(pair.Key).Append(" = ").Append(pair.Value.ToString());
-                }
+                var setColStatments = Values.Select(x => $"SET {x.Key} = {x.Value}");
+                sb.Append("SET ");
+                sb.AppendJoin("," + Environment.NewLine, setColStatments);
             }
             else
             {
+                var setColStatments = Enumerable.Range(0, ColumnNames.Count)
+                    .Select(i => (colName: ColumnNames[i], valExpr: ValueExpressions[i]))
+                    .Select(x => $"{x.colName} = {x.valExpr}");
+                sb.Append("SET ");
+                sb.AppendJoin("," + Environment.NewLine, setColStatments);
+
+
                 for (int i = 0; i < ColumnNames.Count; i++)
                 {
                     if (i == 0) { sb.AppendLine("SET"); }

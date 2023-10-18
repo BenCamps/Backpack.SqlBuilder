@@ -5,9 +5,12 @@ using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Backpack.SqlBuilder.Test
+
+using BackPack.SqlBuilder.Sqlite;
+
+namespace Backpack.SqlBuilder.Sqlite.Test
 {
-    public class SqlSelectBuilderTest : TestBase
+    public class SqlSelectBuilderTest : SqliteTestBase
     {
         public SqlSelectBuilderTest(ITestOutputHelper output)
             : base(output)

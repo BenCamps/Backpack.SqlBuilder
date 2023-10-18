@@ -2,12 +2,12 @@
 
 	<PropertyGroup Label="Assembly Info">
 		<AssemblyName>Backpack.SqlBuilder</AssemblyName>
-		<Version>1.1.5</Version>
+		<Version>2.0</Version>
 		<RootNamespace>Backpack.SqlBuilder</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Build Options">
-		<TargetFrameworks>net462;netstandard2.0;net60;</TargetFrameworks>
+		<TargetFrameworks>net472;netstandard2.0;net60;</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 

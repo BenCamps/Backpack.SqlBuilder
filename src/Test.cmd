@@ -12,14 +12,14 @@ SET me=%~n0
 ::directory of script
 SET parent=%~dp0
 
-dotnet test %parent%FMSC.ORM.Test\FMSC.ORM.Test.csproj -f netcoreapp2.0
-dotnet test %parent%FMSC.ORM.Test\FMSC.ORM.Test.csproj -f net472
+::dotnet test %parent%FMSC.ORM.Test\FMSC.ORM.Test.csproj -f netcoreapp2.0
+::dotnet test %parent%FMSC.ORM.Test\FMSC.ORM.Test.csproj -f net472
 
-dotnet test %parent%CruiseDAL.Core.Test\CruiseDAL.Core.Tests.csproj 
+::dotnet test %parent%CruiseDAL.Core.Test\CruiseDAL.Core.Tests.csproj 
 
-dotnet test %parent%CruiseDAL.V2.Test\CruiseDAL.V2.Test.csproj
+::dotnet test %parent%CruiseDAL.V2.Test\CruiseDAL.V2.Test.csproj
 
-dotnet test %parent%CruiseDAL.V3.Test\CruiseDAL.V3.Test.csproj
+::dotnet test %parent%CruiseDAL.V3.Test\CruiseDAL.V3.Test.csproj
 
 ::if invoked from windows explorer, pause
 IF "%interactive%"=="0" PAUSE

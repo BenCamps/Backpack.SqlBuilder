@@ -1,13 +1,11 @@
-﻿using FluentAssertions;
-using Backpack.SqlBuilder;
-using System.Collections.Generic;
+﻿using BackPack.SqlBuilder.Sqlite;
+using FluentAssertions;
 using System.Data;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Backpack.SqlBuilder.Test
 {
-    public class CreateTableTest : TestBase
+    public class CreateTableTest : SqliteTestBase
     {
         public CreateTableTest(ITestOutputHelper output) : base(output)
         {
@@ -65,7 +63,6 @@ namespace Backpack.SqlBuilder.Test
 
             VerifyCommandSyntex(sql);
             sql.Should().BeEquivalentTo(expected);
-
         }
 
         [Theory]
@@ -87,10 +84,7 @@ namespace Backpack.SqlBuilder.Test
 
             VerifyCommandSyntex(sql);
             sql.Should().BeEquivalentTo(expected);
-
         }
-
-
 
         [Theory]
         [InlineData("CREATE TABLE tbl (col1 TEXT)", "tbl")]

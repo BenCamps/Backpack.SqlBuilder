@@ -1,36 +1,25 @@
 ﻿using Backpack.SqlBuilder.Sqlite;
+using Backpack.SqlBuilder.TestCommon;
 using FluentAssertions;
 using System.Data.Common;
-using System.IO;
 using Xunit.Abstractions;
 
-namespace Backpack.SqlBuilder.Test
+
+
+namespace BackPack.SqlBuilder.Sqlite
 {
-    public abstract class TestBase
+    public class SqliteTestBase : TestBase
     {
-        protected readonly ITestOutputHelper Output;
-        private string _testTempPath;
+
         protected DbProviderFactory DbProvider { get; set; }
-        protected ISqlDialect Dialect { get; private set; }
 
-        public TestBase(ITestOutputHelper output)
+        public SqliteTestBase(ITestOutputHelper output) : base(output, new SqliteDialect())
         {
-            Output = output;
-            Dialect = new SqliteDialect();
-
 #if SYSTEM_DATA_SQLITE
             DbProvider = System.Data.SQLite.SQLiteFactory.Instance;
 #elif MICROSOFT_DATA_SQLITE
             DbProvider = Microsoft.Data.Sqlite.SqliteFactory.Instance;
 #endif
-        }
-
-        public string TestFilePath
-        {
-            get
-            {
-                return _testTempPath ?? (_testTempPath = Path.Combine(Path.GetTempPath(), "TestTemp", this.GetType().FullName));
-            }
         }
 
         protected void VerifyCommandSyntex(string commandText)

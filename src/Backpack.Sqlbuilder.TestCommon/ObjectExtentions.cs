@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace Backpack.SqlBuilder.Test.Util
+namespace Backpack.SqlBuilder.TestCommon
 {
     internal static class ObjectExtentions
     {

@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Backpack.Sqlbuilder
+namespace Backpack.SqlBuilder
 {
     internal static class StringBuilderExtentions
     {
-        public static StringBuilder Join(this StringBuilder @this, string seporator, IEnumerable<string> elements)
+#if !NET6_0_OR_GREATER
+        public static StringBuilder AppendJoin(this StringBuilder @this, string separator, IEnumerable<string> elements)
         {
-            var first = false;
+            var first = true;
             foreach (var e in elements)
             {
-                if (first == false) { @this.Append(seporator); }
+                if (first == false) { @this.Append(separator); }
                 else { first = false; }
                 @this.Append(e);
             }
             return @this;
         }
+#endif
     }
 }
