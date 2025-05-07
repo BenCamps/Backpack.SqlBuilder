@@ -82,11 +82,8 @@ namespace Backpack.SqlBuilder.Sqlite
         public override DbType MapSQLtypeToDbType(string sqlType)
         {
             if (sqlType == null) { throw new ArgumentNullException("sqlType"); }
-<<<<<<<< HEAD:src/Backpack.SqlBuilder/Sqlite/SqliteDialect.cs
             sqlType = sqlType.ToUpperInvariant();
-========
-            sqlType = sqlType.ToUpper(System.Globalization.CultureInfo.InvariantCulture);
->>>>>>>> master:src/BackPack.SqlBuilder.Sqlite/SqliteDialect.cs
+
             switch (sqlType)
             {
                 case SqliteDataType.BLOB:
